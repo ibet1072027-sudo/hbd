@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        :root {
+            --paper-color: #f5f1e8;
+            --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noiseFilter)' opacity='0.2'/%3E%3C/svg%3E");
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --accent-color: #e8b4bc;
+            --accent-dark: #c8959e;
+            --text-color: #5a4a42;
+            --gold-color: #d4af37;
+            --handwritten-font: 'Caveat', cursive;
+            --sans-font: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5e6e8 0%, #f0d9e0 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        /* Birthday Header */
+        .header {
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--accent-dark);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Cake Scene */
+        .cake-scene {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1s ease, opacity 1s ease;
+        }
+
+        .cake-scene.hidden {
+            transform: translateY(-100px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .cake-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .cake {
+            position: absolute;
+            width: 200px;
+            height: 80px;
+            background: linear-gradient(to bottom, #ffd8cb 0%, #ffc9b7 100%);
+            border-radius: 10px 10px 0 0;
+            bottom: 0;
+            left: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cake-top {
+            position: absolute;
+            width: 220px;
+            height: 30px;
+            background: linear-gradient(to bottom, #ffb8d0 0%, #ff9ec1 100%);
+            border-radius: 10px;
+            bottom: 80px;
+            left: 40px;
+        }
+
+        .candles {
+            position: absolute;
+            width: 100%;
+            height: 60px;
+            bottom: 110px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .candle {
+            width: 12px;
+            height: 50px;
+            background: linear-gradient(to bottom, #ff6b6b 0%, #ff8e8e 100%);
+            border-radius: 6px;
+            position: relative;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+            transition: all 0.5s ease;
+        }
+
+        .candle.flame-out {
+            background: linear-gradient(to bottom, #888 0%, #aaa 100%);
+            box-shadow: none;
+        }
+
+        .flame {
+            position: absolute;
+            width: 20px;
+            height: 40px;
+            background: radial-gradient(ellipse at center, #ffef00 0%, #ff9d00 50%, transparent 70%);
+            border-radius: 50% 50% 20% 20%;
+            top: -35px;
+            left: -4px;
+            animation: flicker 0.5s infinite alternate;
+            transition: opacity 0.5s ease;
+        }
+
+        .flame-out .flame {
+            opacity: 0;
+        }
+
+        .instructions {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-style: italic;
+            animation: pulse 2s infinite;
+        }
+
+        .blow-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(232, 180, 188, 0.4);
+        }
+
+        .blow-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Book Container (from second design) */
+        .book-container {
+            width: 100%;
+            max-width: 900px;
+            height: 600px;
+            perspective: 2000px;
+            position: relative;
+            display: none;
+            margin: 0 auto;
+        }
+
+        .book-container.visible {
+            display: block;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .book {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.42, 0, 0.58, 1);
+            transform-origin: left center;
+            border-radius: 0 8px 8px 0;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-front, .page-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: var(--paper-color);
+            background-image: var(--paper-texture);
+            padding: 30px;
+            border-radius: 0 8px 8px 0;
+            overflow: hidden;
+        }
+
+        .page-front {
+            z-index: 2;
+        }
+
+        .page-back {
+            transform: rotateY(180deg);
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+            z-index: 20;
+        }
+
+        .page-shadow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.1) 0%, transparent 5%);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Video Pages (1-5) */
+        .video-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .video-wrapper {
+            width: 85%;
+            height: 75%;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: rotate(-0.5deg);
+            border: 8px solid white;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-caption {
+            font-family: var(--handwritten-font);
+            font-size: 1.8rem;
+            margin-top: 25px;
+            color: var(--accent-dark);
+            text-align: center;
+            max-width: 80%;
+        }
+
+        /* Standard Photo Pages (6-15) */
+        .photo-page-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            padding: 10px;
+        }
+
+        .photo-single {
+            width: 70%;
+            height: 85%;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: rotate(1deg);
+            border: 10px solid white;
+        }
+
+        .photo-double {
+            width: 45%;
+            height: 75%;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+            border: 8px solid white;
+        }
+
+        .photo-double:nth-child(1) {
+            transform: rotate(-2deg);
+        }
+
+        .photo-double:nth-child(2) {
+            transform: rotate(3deg);
+        }
+
+        .photo-caption {
+            font-family: var(--handwritten-font);
+            font-size: 2rem;
+            text-align: center;
+            color: var(--text-color);
+            margin-top: 15px;
+            padding: 0 20px;
+        }
+
+        .photo-date {
+            font-family: var(--sans-font);
+            font-size: 1rem;
+            color: var(--accent-dark);
+            text-align: center;
+            margin-top: 5px;
+            font-weight: 300;
+        }
+
+        /* Mini Photo / Sticker Pages (16-20) */
+        .sticker-page-content {
+            height: 100%;
+            position: relative;
+        }
+
+        .sticker {
+            position: absolute;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 6px solid white;
+        }
+
+        .sticker-1 { width: 35%; height: 30%; top: 10%; left: 10%; transform: rotate(-5deg); }
+        .sticker-2 { width: 30%; height: 25%; top: 15%; right: 15%; transform: rotate(3deg); }
+        .sticker-3 { width: 40%; height: 35%; bottom: 20%; left: 5%; transform: rotate(-2deg); }
+        .sticker-4 { width: 35%; height: 30%; bottom: 25%; right: 10%; transform: rotate(4deg); }
+        .sticker-5 { width: 25%; height: 20%; top: 45%; left: 40%; transform: rotate(-1deg); }
+        .sticker-6 { width: 20%; height: 18%; top: 60%; right: 30%; transform: rotate(6deg); }
+
+        .polaroid {
+            background-color: white;
+            padding: 8px 8px 30px 8px;
+        }
+
+        .tape {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            opacity: 0.8;
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+
+        .tape-1 { top: 5%; left: 25%; }
+        .tape-2 { bottom: 15%; right: 20%; }
+
+        .decoration {
+            position: absolute;
+            font-size: 1.8rem;
+            color: #ff6b8b;
+            z-index: 1;
+        }
+
+        .heart { top: 8%; right: 12%; }
+        .star { bottom: 10%; left: 15%; }
+        .star-2 { top: 65%; right: 8%; }
+
+        /* Burned Letter Section - NEW ADDITION */
+        .burned-letter-section {
+            width: 100%;
+            max-width: 800px;
+            display: none;
+            margin: 50px auto;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .burned-letter-section.visible {
+            display: block;
+        }
+
+        .burned-paper {
+            position: relative;
+            background: #f5e6c8;
+            background-image: linear-gradient(to bottom, #f5e6c8 0%, #e8d4b0 100%);
+            padding: 40px 50px;
+            border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transform: rotate(-0.5deg);
+            margin-bottom: 30px;
+        }
+
+        .burned-paper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #8B4513 0%, #D2691E 25%, #8B4513 50%, #D2691E 75%, #8B4513 100%);
+            border-radius: 4px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .burned-edges {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 0% 0%, rgba(139, 69, 19, 0.4) 10px, transparent 20px),
+                radial-gradient(circle at 100% 0%, rgba(139, 69, 19, 0.4) 10px, transparent 20px),
+                radial-gradient(circle at 0% 100%, rgba(139, 69, 19, 0.4) 10px, transparent 20px),
+                radial-gradient(circle at 100% 100%, rgba(139, 69, 19, 0.4) 10px, transparent 20px),
+                linear-gradient(to right, rgba(139, 69, 19, 0.3) 0px, transparent 5px, transparent calc(100% - 5px), rgba(139, 69, 19, 0.3) 100%),
+                linear-gradient(to bottom, rgba(139, 69, 19, 0.3) 0px, transparent 5px, transparent calc(100% - 5px), rgba(139, 69, 19, 0.3) 100%);
+            pointer-events: none;
+        }
+
+        .burned-holes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(0, 0, 0, 0.6) 8px, transparent 12px),
+                radial-gradient(circle at 85% 30%, rgba(0, 0, 0, 0.5) 6px, transparent 10px),
+                radial-gradient(circle at 40% 80%, rgba(0, 0, 0, 0.4) 4px, transparent 8px),
+                radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.3) 5px, transparent 9px);
+            pointer-events: none;
+        }
+
+        .letter-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .letter-date {
+            font-family: var(--handwritten-font);
+            font-size: 1.5rem;
+            color: #8B4513;
+            text-align: right;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #8B4513;
+            padding-bottom: 10px;
+        }
+
+        .letter-salutation {
+            font-family: var(--handwritten-font);
+            font-size: 2.2rem;
+            color: #8B4513;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .letter-body {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            color: #5a4a42;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .letter-body p {
+            margin-bottom: 20px;
+            text-indent: 30px;
+        }
+
+        .letter-body p:first-letter {
+            font-size: 2.5rem;
+            color: #8B4513;
+            font-weight: bold;
+        }
+
+        .letter-signature {
+            font-family: var(--handwritten-font);
+            font-size: 2.5rem;
+            color: #8B4513;
+            text-align: right;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed #8B4513;
+        }
+
+        .letter-reveal-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 40px;
+            background: linear-gradient(to bottom, #8B4513 0%, #A0522D 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+            font-family: var(--handwritten-font);
+            font-size: 1.5rem;
+        }
+
+        .letter-reveal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.6);
+        }
+
+        .letter-instruction {
+            text-align: center;
+            font-style: italic;
+            color: #8B4513;
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(232, 180, 188, 0.4);
+        }
+
+        .btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+        }
+
+        .btn:disabled {
+            background: #ddd;
+            color: #aaa;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .page-indicator {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .page-indicator .current {
+            font-weight: 600;
+            color: var(--accent-dark);
+        }
+
+        /* Page numbers */
+        .page-number {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-family: var(--sans-font);
+            font-size: 0.9rem;
+            color: var(--accent-dark);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .music-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Swipe hint for mobile */
+        .swipe-hint {
+            display: none;
+            font-size: 1rem;
+            color: var(--accent-dark);
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes flicker {
+            0%, 100% {
+                transform: scale(1) translateY(0);
+            }
+            50% {
+                transform: scale(1.05) translateY(-2px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes burnEffect {
+            0% {
+                background-color: #f5e6c8;
+            }
+            100% {
+                background-color: #e8d4b0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .book-container {
+                height: 500px;
+            }
+            
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .photo-caption, .video-caption {
+                font-size: 1.5rem;
+            }
+            
+            .burned-letter-section {
+                max-width: 90%;
+            }
+            
+            .burned-paper {
+                padding: 30px;
+            }
+            
+            .letter-body {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .book-container {
+                height: 400px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .photo-caption, .video-caption {
+                font-size: 1.3rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .music-player {
+                position: static;
+                margin-top: 20px;
+            }
+            
+            .swipe-hint {
+                display: block;
+            }
+            
+            .burned-paper {
+                padding: 20px;
+            }
+            
+            .letter-body {
+                font-size: 1.4rem;
+            }
+            
+            .letter-salutation {
+                font-size: 1.8rem;
+            }
+            
+            .letter-signature {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .book-container {
+                height: 350px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .letter-body {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Birthday Header -->
+        <div class="header">
+            <h1>Happy Birthday, My Love</h1>
+            <p>Today is all about celebrating you and the beautiful memories we've created together.</p>
+        </div>
+
+        <!-- Cake Scene -->
+        <div class="cake-scene" id="cakeScene">
+            <div class="cake-container">
+                <div class="cake"></div>
+                <div class="cake-top"></div>
+                <div class="candles">
+                    <div class="candle" id="candle1">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" id="candle2">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" id="candle3">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" id="candle4">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle" id="candle5">
+                        <div class="flame"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="instructions">Blow out the candles to reveal your special gift</p>
+            <button class="blow-btn" id="blowBtn">Blow Out Candles</button>
+        </div>
+
+        <!-- Book Container (20 pages scrapbook) -->
+        <div class="book-container" id="bookContainer">
+            <div class="book" id="book">
+                <!-- Pages will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls" id="controls">
+            <button class="btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <button class="btn" id="nextBtn">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <div class="page-indicator" id="pageIndicator">
+            Page <span class="current" id="currentPage">1</span> of <span id="totalPages">20</span>
+        </div>
+
+        <!-- Burned Letter Section - NEW SECTION -->
+        <div class="burned-letter-section" id="burnedLetterSection">
+            <div class="burned-paper">
+                <div class="burned-edges"></div>
+                <div class="burned-holes"></div>
+                <div class="letter-content">
+                    <div class="letter-date">On this special day, my love</div>
+                    <div class="letter-salutation">My Dearest Love,</div>
+                    <div class="letter-body" id="letterBody">
+                        <!-- Letter content will be added by JavaScript -->
+                    </div>
+                    <div class="letter-signature">Forever Yours</div>
+                </div>
+            </div>
+            <button class="letter-reveal-btn" id="letterRevealBtn">
+                <i class="fas fa-fire"></i> Read My Heart's Message
+            </button>
+            <p class="letter-instruction">This letter has been waiting in my heart for you</p>
+        </div>
+
+        <!-- Swipe hint for mobile -->
+        
+
+        <!-- Music Player -->
+        <div class="music-player">
+            <button class="music-btn" id="playBtn">
+                <i class="fas fa-play"></i>
+            </button>
+            <span>Our Song</span>
+            <audio id="backgroundMusic" loop>
+                <source src="aud/Alex Warren - Carry You Home (Official Video)(MP3_160K).mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Made with ❤️ for your special day
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const cakeScene = document.getElementById('cakeScene');
+            const bookContainer = document.getElementById('bookContainer');
+            const blowBtn = document.getElementById('blowBtn');
+            const candles = document.querySelectorAll('.candle');
+            const bookElement = document.getElementById('book');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const currentPageEl = document.getElementById('currentPage');
+            const totalPagesEl = document.getElementById('totalPages');
+            const controls = document.getElementById('controls');
+            const pageIndicator = document.getElementById('pageIndicator');
+            const playBtn = document.getElementById('playBtn');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            const playIcon = playBtn.querySelector('i');
+            
+            // New elements for burned letter section
+            const burnedLetterSection = document.getElementById('burnedLetterSection');
+            const letterBody = document.getElementById('letterBody');
+            const letterRevealBtn = document.getElementById('letterRevealBtn');
+            
+            // Configuration for 20-page scrapbook
+            const TOTAL_PAGES = 20;
+            const VIDEO_PAGES = 5;
+            const STANDARD_PHOTO_PAGES = 10;
+            const STICKER_PAGES = 5;
+            
+            // Video URLs (using placeholder videos)
+            const VIDEO_URLS = [
+                "ved/s.mp4",
+                "ved/2026-02-07-083943539.mp4",
+                "ved/video_2026-02-07_08-51-34 (2).mp4",
+                "ved/video_2026-02-07_08-51-34 (3).mp4",
+                "ved/ش.mp4"
+            ];
+            
+            // Photo URLs (using your images - add more as needed)
+            const PHOTO_URLS = [
+                "img/1768390479071.jpg",
+                "img/IMG-20240930-WA0012.jpg",
+                "img/IMG-20241007-WA0034 (1).jpg",
+                "img/IMG-20250714-WA0001.jpg",
+                "img/IMG-20250909-WA0029.jpg",
+                "img/IMG-20250921-WA0010.jpg",
+                "img/IMG-20251027-WA0022.jpg",
+                "img/IMG_20251207_134250_115@-2026492580.jpg",
+                "img/IMG_20260114_132127_707@1360492115.jpg",
+                "img/IMG_20260114_132253_891@-1246491585.jpg",
+                "img/Messenger_creation_5477D4DD-E409-4BF6-9308-A1A12D326DFC.jpeg",
+                "img/IMG_20260205_140732_364@1161764688.jpg",
+                "img/IMG_20260205_133020_008@-1777963253.jpg",
+                "img/IMG_20260205_124623_982@-758589267.jpg",
+                "img/IMG-20250909-WA0033.jpg",
+                "img2/photo_10_2026-02-07_10-39-37.jpg",
+                "img2/photo_11_2026-02-07_10-39-37.jpg",
+                "img2/photo_12_2026-02-07_10-39-37.jpg",
+                "img2/photo_13_2026-02-07_10-39-37.jpg",
+                "img2/photo_15_2026-02-07_10-39-37.jpg",
+                "img2/photo_16_2026-02-07_10-39-37.jpg",
+                "img2/photo_17_2026-02-07_10-39-38.jpg",
+                "img2/photo_18_2026-02-07_10-39-38.jpg",
+                "img2/photo_19_2026-02-07_10-39-38.jpg",
+                "img2/photo_1_2026-02-07_10-39-37.jpg",
+                "img2/photo_20_2026-02-07_10-39-38.jpg",
+                "img2/photo_21_2026-02-07_10-39-38.jpg",
+                "img2/photo_22_2026-02-07_10-39-38.jpg",
+                "img2/photo_23_2026-02-07_10-39-38.jpg",
+                "img2/photo_24_2026-02-07_10-39-38.jpg",
+                "img2/photo_2_2026-02-07_10-39-37.jpg",
+                "img2/photo_3_2026-02-07_10-39-37.jpg",
+                "img2/photo_4_2026-02-07_10-39-37.jpg",
+                "img2/photo_5_2026-02-07_10-39-37.jpg",
+                "img2/photo_6_2026-02-07_10-39-37.jpg",
+                "img2/photo_7_2026-02-07_10-39-37.jpg",
+                "img2/photo_8_2026-02-07_10-39-37.jpg",
+                "img2/photo_9_2026-02-07_10-39-37.jpg",
+                "img2/photo_14_2026-02-07_10-39-37.jpg"
+                // Add more photos here as needed
+            ];
+            
+            // Add more photo URLs dynamically if needed
+            // You can add more photos by extending the PHOTO_URLS array
+            
+            // Captions for different page types
+            const VIDEO_CAPTIONS = [
+                "cuteeeeeeeee 🥰🥰🥰",
+                "big biiiiiiiiiiig kiss",
+                "Can not take my eyes from you ",
+                "My littek princes ",
+                "Quiet Moments Together"
+            ];
+            
+            const PHOTO_CAPTIONS = [
+                "You changed the way I see the world",
+                "Being with you feels like coming home",
+                "You made me believe in gentle things",
+                "I found clarity in your presence",
+                "You are my favorite choice",
+                "You bring meaning to my quiet moments",
+                "You showed me a softer kind of strength",
+                "You are the peace I didn’t know I needed",
+                "You made patience feel worth it",
+                "With you, things make sense",
+                "You taught my heart how to slow down",
+                "You are the reason I try harder",
+                "You turned ordinary days into something special",
+                "You make silence feel comfortable",
+                "You gave my heart a reason to stay",
+                "You inspire the best parts of me",
+                "You are the calm after long storms",
+                "You make effort feel natural",
+                "You are where my thoughts rest",
+                "You are my everyday miracle"
+
+            ];
+            
+            const STICKER_CAPTIONS = [
+                "Little Treasures",
+                "Precious Moments",
+                "Tiny Memories",
+                "Happy Times",
+                "Sweet Collection"
+            ];
+            
+            const DATES = [
+                "July 22, 2025",
+                "August 31, 2025", 
+                "September 9, 2025",
+                "September 14, 2025",
+                "July 13, 2025",
+                "February, 15 , 2003 ",
+                "September 8, 2025",
+                "November 5, 2025",
+                "November 23, 2025",
+                "November 29, 2025",
+                "December 20, 2025",
+                "January 14, 2026",
+                "February 5, 2026",
+                "March 18, 2024",
+                "November 23, 2023",
+                "February 5, 2024",
+                "April 15, 2024",
+                "June 28, 2024",
+                "August 10, 2024",
+                "Today - Your Special Day!"
+            ];
+            
+            // Letter content - a heartfelt birthday message
+            const LETTER_CONTENT = [
+                "As I begin writing this letter, I find myself filled with deep emotion. I am writing to you on your birthday, a day that marks not only another year of your life, but another year of the bright light you bring into this world.",                
+                "As I look back on our memories together, from our first shy meeting to the comforting silence we now share, I realize that every moment has been a precious treasure. I remember how your laughter once made me nervous, and now it has become the sound I long to hear every single day.",                
+                "You have a beautiful gift for finding joy in the simplest things. A rainy day turns into an adventure, a simple meal becomes a celebration, and quiet outings feel like the most meaningful moments. You have taught me to see the world with eyes full of wonder and gratitude.",               
+                 "On this special day, I want you to know that you are loved more than you could ever imagine. Your kindness, your strength, and your gentle spirit make you the most wonderful person I know. The world feels warmer because you are in it, and my life is far more beautiful because you are in mine.",                
+                 "I promise to stand beside you through every part of life — in bright days and in difficult nights, in laughter and in tears. I promise to be your safe place, your strongest supporter, and the one who believes in you even when you struggle to believe in yourself.",                
+                 "As you blow out your candles today, I hope you remember something simple yet meaningful: try to see yourself the way I see you, and realize how truly special you are. May your days be filled with the same happiness you give to others, and may your heart always stay full of light.",              
+                   "Happy birthday, بستاني. Today, tomorrow, and always — you have my heart, completely and forever"
+            ];
+            
+            // State management
+            let currentPageIndex = 0;
+            let pages = [];
+            let isAnimating = false;
+            let isMusicPlaying = false;
+            let isLetterRevealed = false;
+            let bookCompleted = false;
+            
+            // Photo management system
+            let usedPhotos = new Set();
+            let availablePhotos = [...PHOTO_URLS];
+            
+            // Function to get a unique photo that hasn't been used before
+            function getUniquePhoto() {
+                if (availablePhotos.length === 0) {
+                    // If we run out of unique photos, reset (but this shouldn't happen)
+                    console.warn("Ran out of unique photos, some may repeat");
+                    availablePhotos = [...PHOTO_URLS];
+                    usedPhotos.clear();
+                }
+                
+                // Find a photo that hasn't been used
+                let photoIndex;
+                let photoUrl;
+                
+                // Try to find an unused photo
+                for (let i = 0; i < availablePhotos.length; i++) {
+                    if (!usedPhotos.has(availablePhotos[i])) {
+                        photoIndex = i;
+                        photoUrl = availablePhotos[i];
+                        break;
+                    }
+                }
+                
+                // If all photos are used, use the first one
+                if (!photoUrl) {
+                    photoIndex = 0;
+                    photoUrl = availablePhotos[0];
+                    // Reset used photos since we're starting over
+                    usedPhotos.clear();
+                }
+                
+                // Mark this photo as used
+                usedPhotos.add(photoUrl);
+                
+                return photoUrl;
+            }
+            
+            // Function to shuffle an array (Fisher-Yates algorithm)
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+            
+            // Initialize the scrapbook
+            function initScrapbook() {
+                totalPagesEl.textContent = TOTAL_PAGES;
+                
+                // Reset photo tracking
+                usedPhotos.clear();
+                availablePhotos = shuffleArray([...PHOTO_URLS]);
+                
+                // Create all pages
+                for (let i = 0; i < TOTAL_PAGES; i++) {
+                    createPage(i);
+                }
+                
+                // Set initial z-index for pages (first page on top)
+                updatePageStack();
+                
+                // Update UI
+                updateNavigation();
+                
+                // Set up event listeners for navigation
+                prevBtn.addEventListener('click', goToPreviousPage);
+                nextBtn.addEventListener('click', goToNextPage);
+                
+                // Keyboard navigation
+                document.addEventListener('keydown', handleKeyDown);
+                
+                // Touch swipe for mobile
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                bookContainer.addEventListener('touchstart', e => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+                
+                bookContainer.addEventListener('touchend', e => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                });
+            }
+            
+            // Create a page based on its index
+            function createPage(pageIndex) {
+                const page = document.createElement('div');
+                page.className = 'page';
+                page.dataset.index = pageIndex;
+                
+                const front = document.createElement('div');
+                front.className = 'page-front';
+                
+                const back = document.createElement('div');
+                back.className = 'page-back';
+                
+                // Add page number to back of page
+                const pageNumber = document.createElement('div');
+                pageNumber.className = 'page-number';
+                pageNumber.textContent = `${pageIndex + 1}`;
+                back.appendChild(pageNumber);
+                
+                // Add page shadow
+                const shadow = document.createElement('div');
+                shadow.className = 'page-shadow';
+                
+                // Determine page type based on index
+                if (pageIndex < VIDEO_PAGES) {
+                    // Video pages (1-5)
+                    createVideoPageContent(front, pageIndex);
+                    createPhotoPageContent(back, pageIndex, true); // Back side is a photo page
+                } else if (pageIndex < VIDEO_PAGES + STANDARD_PHOTO_PAGES) {
+                    // Standard photo pages (6-15)
+                    createPhotoPageContent(front, pageIndex);
+                    createPhotoPageContent(back, pageIndex, true);
+                } else {
+                    // Sticker pages (16-20)
+                    createStickerPageContent(front, pageIndex);
+                    createPhotoPageContent(back, pageIndex, true);
+                }
+                
+                page.appendChild(front);
+                page.appendChild(back);
+                page.appendChild(shadow);
+                bookElement.appendChild(page);
+                
+                pages.push(page);
+            }
+            
+            // Create content for video pages
+            function createVideoPageContent(container, pageIndex) {
+                const videoIndex = pageIndex % VIDEO_URLS.length;
+                
+                const content = document.createElement('div');
+                content.className = 'video-container';
+                
+                const wrapper = document.createElement('div');
+                wrapper.className = 'video-wrapper';
+                
+                const video = document.createElement('video');
+                video.playsInline = true;
+                video.muted = true;
+                video.loop = true;
+                
+                // Only autoplay the first video
+                if (pageIndex === 0) {
+                    video.autoplay = true;
+                }
+                
+                const source = document.createElement('source');
+                source.src = VIDEO_URLS[videoIndex];
+                source.type = 'video/mp4';
+                
+                video.appendChild(source);
+                wrapper.appendChild(video);
+                
+                const caption = document.createElement('div');
+                caption.className = 'video-caption';
+                caption.textContent = VIDEO_CAPTIONS[videoIndex] || "Special Moment";
+                
+                content.appendChild(wrapper);
+                content.appendChild(caption);
+                container.appendChild(content);
+                
+                // Store video element for later control
+                container.dataset.videoElement = video;
+            }
+            
+            // Create content for standard photo pages
+            function createPhotoPageContent(container, pageIndex, isBack = false) {
+                const captionIndex = pageIndex % PHOTO_CAPTIONS.length;
+                const dateIndex = pageIndex % DATES.length;
+                
+                const content = document.createElement('div');
+                content.className = 'photo-page-content';
+                
+                const photoContainer = document.createElement('div');
+                photoContainer.className = 'photo-container';
+                
+                // Always use unique photos - no repeating
+                if (pageIndex % 3 === 0 || isBack) {
+                    // Single photo
+                    const photoDiv = document.createElement('div');
+                    photoDiv.className = 'photo-single';
+                    photoDiv.style.backgroundImage = `url(${getUniquePhoto()})`;
+                    photoDiv.style.backgroundSize = 'cover';
+                    photoDiv.style.backgroundPosition = 'center';
+                    photoContainer.appendChild(photoDiv);
+                } else {
+                    // Two photos - both unique
+                    const photoDiv1 = document.createElement('div');
+                    photoDiv1.className = 'photo-double';
+                    photoDiv1.style.backgroundImage = `url(${getUniquePhoto()})`;
+                    photoDiv1.style.backgroundSize = 'cover';
+                    photoDiv1.style.backgroundPosition = 'center';
+                    
+                    const photoDiv2 = document.createElement('div');
+                    photoDiv2.className = 'photo-double';
+                    photoDiv2.style.backgroundImage = `url(${getUniquePhoto()})`;
+                    photoDiv2.style.backgroundSize = 'cover';
+                    photoDiv2.style.backgroundPosition = 'center';
+                    
+                    photoContainer.appendChild(photoDiv1);
+                    photoContainer.appendChild(photoDiv2);
+                }
+                
+                const caption = document.createElement('div');
+                caption.className = 'photo-caption';
+                caption.textContent = PHOTO_CAPTIONS[captionIndex] || "Beautiful Memory";
+                
+                const date = document.createElement('div');
+                date.className = 'photo-date';
+                date.textContent = DATES[dateIndex];
+                
+                content.appendChild(photoContainer);
+                content.appendChild(caption);
+                content.appendChild(date);
+                container.appendChild(content);
+            }
+            
+            // Create content for sticker pages
+            function createStickerPageContent(container, pageIndex) {
+                const stickerIndex = pageIndex - VIDEO_PAGES - STANDARD_PHOTO_PAGES;
+                
+                const content = document.createElement('div');
+                content.className = 'sticker-page-content';
+                
+                // Add decorative elements
+                const heart = document.createElement('div');
+                heart.className = 'decoration heart';
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                
+                const star = document.createElement('div');
+                star.className = 'decoration star';
+                star.innerHTML = '<i class="fas fa-star"></i>';
+                
+                const star2 = document.createElement('div');
+                star2.className = 'decoration star-2';
+                star2.innerHTML = '<i class="fas fa-star"></i>';
+                
+                // Add tape decorations
+                const tape1 = document.createElement('div');
+                tape1.className = 'tape tape-1';
+                
+                const tape2 = document.createElement('div');
+                tape2.className = 'tape tape-2';
+                
+                // Create 3-6 sticker photos - all unique
+                const stickerCount = 3 + (pageIndex % 3); // 3-5 stickers to ensure uniqueness
+                
+                for (let i = 0; i < stickerCount; i++) {
+                    const sticker = document.createElement('div');
+                    sticker.className = `sticker sticker-${i + 1}`;
+                    
+                    // Make some stickers look like polaroids
+                    if (i % 2 === 0) {
+                        sticker.classList.add('polaroid');
+                    }
+                    
+                    // Use unique photo for each sticker
+                    sticker.style.backgroundImage = `url(${getUniquePhoto()})`;
+                    sticker.style.backgroundSize = 'cover';
+                    sticker.style.backgroundPosition = 'center';
+                    
+                    content.appendChild(sticker);
+                }
+                
+                content.appendChild(tape1);
+                content.appendChild(tape2);
+                content.appendChild(heart);
+                content.appendChild(star);
+                content.appendChild(star2);
+                
+                // Add caption for sticker page
+                const caption = document.createElement('div');
+                caption.className = 'photo-caption';
+                caption.style.position = 'absolute';
+                caption.style.bottom = '20px';
+                caption.style.left = '0';
+                caption.style.width = '100%';
+                caption.style.textAlign = 'center';
+                caption.textContent = STICKER_CAPTIONS[stickerIndex] || "Little Treasures";
+                
+                content.appendChild(caption);
+                container.appendChild(content);
+            }
+            
+            // Create letter content
+            function createLetterContent() {
+                letterBody.innerHTML = '';
+                
+                LETTER_CONTENT.forEach(paragraph => {
+                    const p = document.createElement('p');
+                    p.textContent = paragraph;
+                    letterBody.appendChild(p);
+                });
+            }
+            
+            // Reveal the burned letter
+            function revealLetter() {
+                if (isLetterRevealed) return;
+                
+                isLetterRevealed = true;
+                
+                // Create letter content
+                createLetterContent();
+                
+                // Animate the paper
+                const burnedPaper = document.querySelector('.burned-paper');
+                burnedPaper.style.animation = 'burnEffect 2s ease-out';
+                
+                // Change button text
+                letterRevealBtn.innerHTML = '<i class="fas fa-heart"></i> My Heart is Yours';
+                letterRevealBtn.disabled = true;
+                
+                // Add a subtle glow effect
+                setTimeout(() => {
+                    burnedPaper.style.boxShadow = '0 10px 40px rgba(139, 69, 19, 0.3)';
+                }, 1000);
+            }
+            
+            // Check if book is completed
+            function checkBookCompletion() {
+                if (currentPageIndex === TOTAL_PAGES - 1 && !bookCompleted) {
+                    bookCompleted = true;
+                    
+                    // Show the burned letter section after a delay
+                    setTimeout(() => {
+                        burnedLetterSection.classList.add('visible');
+                        
+                        // Scroll to the letter section smoothly
+                        setTimeout(() => {
+                            burnedLetterSection.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center'
+                            });
+                        }, 500);
+                    }, 1000);
+                }
+            }
+            
+            // Update z-index of all pages to create proper stacking
+            function updatePageStack() {
+                // Reset all z-index
+                pages.forEach((page, index) => {
+                    page.style.zIndex = TOTAL_PAGES - index;
+                });
+                
+                // Bring current page to top
+                if (pages[currentPageIndex]) {
+                    pages[currentPageIndex].style.zIndex = TOTAL_PAGES + 10;
+                }
+            }
+            
+            // Flip to a specific page
+            function flipToPage(pageIndex) {
+                if (isAnimating || pageIndex < 0 || pageIndex >= TOTAL_PAGES) return;
+                
+                isAnimating = true;
+                
+                // Pause video on current page if it exists
+                const currentPage = pages[currentPageIndex];
+                if (currentPage) {
+                    const currentVideo = currentPage.querySelector('.page-front video');
+                    if (currentVideo) {
+                        currentVideo.pause();
+                    }
+                }
+                
+                // Determine if we're going forward or backward
+                const isForward = pageIndex > currentPageIndex;
+                
+                // Flip current page if going forward
+                if (isForward && currentPageIndex < TOTAL_PAGES - 1) {
+                    pages[currentPageIndex].classList.add('flipped');
+                }
+                
+                // If going backward, unflip the previous page
+                if (!isForward && currentPageIndex > 0) {
+                    pages[currentPageIndex - 1].classList.remove('flipped');
+                }
+                
+                // Update current page index
+                currentPageIndex = pageIndex;
+                
+                // Play video on new page if it exists
+                const newPage = pages[currentPageIndex];
+                if (newPage) {
+                    const newVideo = newPage.querySelector('.page-front video');
+                    if (newVideo) {
+                        newVideo.play().catch(e => console.log("Autoplay prevented:", e));
+                    }
+                }
+                
+                // Update page stack after animation
+                setTimeout(() => {
+                    updatePageStack();
+                    updateNavigation();
+                    isAnimating = false;
+                    
+                    // Check if book is completed
+                    checkBookCompletion();
+                }, 800);
+            }
+            
+            // Go to next page
+            function goToNextPage() {
+                if (currentPageIndex < TOTAL_PAGES - 1) {
+                    flipToPage(currentPageIndex + 1);
+                }
+            }
+            
+            // Go to previous page
+            function goToPreviousPage() {
+                if (currentPageIndex > 0) {
+                    flipToPage(currentPageIndex - 1);
+                }
+            }
+            
+            // Handle keyboard navigation
+            function handleKeyDown(e) {
+                if (!bookContainer.classList.contains('visible')) return;
+                
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    goToNextPage();
+                } else if (e.key === 'ArrowLeft') {
+                    goToPreviousPage();
+                }
+            }
+            
+            // Handle touch swipe for mobile
+            function handleSwipe() {
+                if (!bookContainer.classList.contains('visible')) return;
+                
+                const swipeThreshold = 50;
+                const difference = touchStartX - touchEndX;
+                
+                if (Math.abs(difference) > swipeThreshold) {
+                    if (difference > 0) {
+                        // Swipe left - next page
+                        goToNextPage();
+                    } else {
+                        // Swipe right - previous page
+                        goToPreviousPage();
+                    }
+                }
+            }
+            
+            // Update navigation buttons state
+            function updateNavigation() {
+                prevBtn.disabled = currentPageIndex === 0;
+                nextBtn.disabled = currentPageIndex === TOTAL_PAGES - 1;
+                
+                // Update current page display (add 1 because page index starts at 0)
+                currentPageEl.textContent = currentPageIndex + 1;
+            }
+            
+            // Blow out candles animation
+            function blowOutCandles() {
+                let candlesBlown = 0;
+                
+                candles.forEach((candle, index) => {
+                    setTimeout(() => {
+                        candle.classList.add('flame-out');
+                        candlesBlown++;
+                        
+                        // When all candles are blown
+                        if (candlesBlown === candles.length) {
+                            // Hide cake scene and show book
+                            setTimeout(() => {
+                                cakeScene.classList.add('hidden');
+                                
+                                setTimeout(() => {
+                                    bookContainer.classList.add('visible');
+                                    controls.style.display = 'flex';
+                                    pageIndicator.style.display = 'flex';
+                                    
+                                    // Start playing music
+                                    toggleMusic();
+                                    
+                                    // Initialize the scrapbook
+                                    initScrapbook();
+                                }, 500);
+                            }, 1000);
+                        }
+                    }, index * 300);
+                });
+            }
+            
+            // Toggle background music
+            function toggleMusic() {
+                if (isMusicPlaying) {
+                    backgroundMusic.pause();
+                    playIcon.classList.remove('fa-pause');
+                    playIcon.classList.add('fa-play');
+                } else {
+                    backgroundMusic.play().catch(e => {
+                        console.log("Autoplay prevented. User interaction required.");
+                        // If autoplay is blocked, show a message
+                        playBtn.title = "Click to play music";
+                    });
+                    playIcon.classList.remove('fa-play');
+                    playIcon.classList.add('fa-pause');
+                }
+                
+                isMusicPlaying = !isMusicPlaying;
+            }
+            
+            // Event Listeners
+            blowBtn.addEventListener('click', blowOutCandles);
+            playBtn.addEventListener('click', toggleMusic);
+            letterRevealBtn.addEventListener('click', revealLetter);
+            
+            // Allow clicking on candles directly
+            candles.forEach(candle => {
+                candle.addEventListener('click', () => {
+                    if (!candle.classList.contains('flame-out')) {
+                        candle.classList.add('flame-out');
+                    }
+                });
+            });
+            
+            // Show a welcome message
+            setTimeout(() => {
+                alert("Welcome to your birthday surprise! Blow out the candles to begin.");
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
